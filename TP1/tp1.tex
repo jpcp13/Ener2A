@@ -1,0 +1,150 @@
+\documentclass{exam}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+\usepackage[francais]{babel}
+
+\title{TP1\\ Résolution numérique de $f(x) = 0$}
+
+\begin{document}
+\maketitle
+
+
+On écrira le code dans un fichier \texttt{tp1.py}. Pour exécuter le code, ouvrir un terminal linux, saisir \texttt{ipython} et valider. Un terminal ipython se substitue au terminal linux; à l'intérieur saisir \texttt{run tp1.py} et valider.\\
+
+\begin{questions}
+
+\question
+Création d'une fonction simple et représentation graphique. Notions python abordées : fonction python \texttt{def}; module \texttt{matplotlib}.
+\begin{parts}
+\part
+Ecrire la fonction $f(x) = x^2 - x - 1$ sous forme d'une fonction python. 
+\part
+Représentation graphique sur l'intervalle $\left[-1, 2\right]$; utiliser le module \texttt{matplotlib.pyplot}
+\part
+Observer la présence de deux zéros et en donner une estimation grossière.
+\end{parts}
+
+\question
+Recherche d'un zéro d'une fonction au moyen de la {\bf méthode du point fixe}; notion python abordée : boucle \texttt{for}.
+\begin{parts}
+\part
+Vérifier algébriquement que les points fixes de $g$ sont les zéros de $f$. Ecrire la fonction $g(x) = 1 + 1/x$ sous forme d'une fonction python.
+\part
+Calculer les $25$ premiers termes de la suite définie par $x_{n+1} = g(x_n)$ et $x_0 = 1.0$ et enregistrer ces termes dans une liste.
+\part
+Observer la convergence de cette suite vers l'un des deux zéros de $f$.
+\part
+Dessiner, sur papier en repère orthonormé, la fonction $g$ ainsi que la première bisectrice. Expliquer à partir du graphique la convergence observée.
+\end{parts}
+
+\question
+Implémentation d'une fonction python \texttt{point\_fixe}. Notions python abordées : boucle \texttt{while}; aspect fonctionnel de python, c'est-à-dire qu'une fonction peut prendre en argument une fonction. Notion mathématique abordée : point fixe attractif, point fixe répulsif.
+\begin{parts}
+\part
+Ecrire une fonction python \texttt{point\_fixe} qui prend en arguments une fonction $g$, une valeur initiale $x_0$, un réel positif $\epsilon$, et qui renvoie une approximation $r$ d'un point fixe de la fonction $g$. Condition d'arrêt : $\vert x_{n+1} - x_n \vert < \epsilon$
+\part Tests
+\begin{subparts}
+\subpart
+Tester \texttt{point\_fixe} avec $g(x) = 1 + 1/x, x_0 = 1.6, \epsilon = 10^{-12}$. Vers quelle racine y-a-t'il convergence ?
+\subpart
+Tester \texttt{point\_fixe} avec $g(x) = 1 + 1/x, x_0 = -0.6, \epsilon = 10^{-12}$. Vers quelle racine y-a-t'il convergence ?
+\subpart 
+Sur le graphique, examiner la pente de $g$ aux points fixes. Un point fixe $r$ d'une fonction $g$ tel que $\vert g'(r) \vert < 1$ est dit attractif; si $\vert g'(r) \vert > 1$ il est dit répulsif. A partir de ça, expliquer le résultat des tests ci-dessus.
+\end{subparts}
+\end{parts}
+
+
+\question
+On veut, ici encore, calculer un zéro d'une fonction $f$. La {\bf méthode de Newton} consiste à appliquer la méthode du point fixe à la fonction 
+$g(x) = x - \frac{f(x)}{f'(x)}$.
+\begin{parts}
+\part
+Vérifier algébriquement que les points fixes de $g$ sont les zéros de $f$.
+\part
+Interpréter géométriquement la méthode de Newton.
+\part
+Ecrire une fonction python \texttt{newton} qui prend en arguments une fonction $f$, sa dérivée $df$, une valeur initiale $x_0$, un réel positif $\epsilon$, et qui renvoie une approximation $r$ d'une racine de la fonction $f$. Condition d'arrêt : $\vert x_{n+1} - x_n \vert < \epsilon$.
+\part Tests
+\begin{subparts}
+\subpart
+Tester \texttt{newton} avec $f(x) = x^2 - x - 1, x_0 = 1.0, \epsilon = 10^{-12}$
+\subpart
+Tester \texttt{newton} avec $f(x) = x^2 - x - 1, x_0 = -1.0, \epsilon = 10^{-12}$
+\end{subparts}
+\end{parts}
+
+\question
+Toujours à la recherche des zéros de $f$, la {\bf méthode de la sécante} est une méthode itérative où chaque approximation est construite à partir des deux approximations précédentes. On doit donc partir de deux valeurs initiales distinctes, $x_0, x_1$ (en général les bornes d'un encadrement de la racine cherchée), puis on calcule par récurrence les termes de la suite $x_{n+1} = x_n - \frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}f(x_n)$. L'avantage sur la méthode de Newton est qu'on n'a pas besoin de la dérivée de $f$.
+\begin{parts}
+\part
+Vérifier algébriquement que les points fixes de $g$ sont les zéros de $f$.
+\part
+Interpréter géométriquement la méthode de la sécante.
+\part
+Ecrire une fonction python \texttt{secante} qui prend en arguments une fonction $f$, deux valeurs initiales $x_0, x_1$, un réel positif $\epsilon$, et qui renvoie une approximation $r$ d'une racine de la fonction $f$. Condition d'arrêt : $\vert x_{n+1} - x_n \vert < \epsilon$.
+\part Tests
+\begin{subparts}
+\subpart
+Tester \texttt{secante} avec $f(x) = x^2 - x - 1, x_0 = 1.5, x_1 = 2.0, \epsilon = 10^{-12}$
+\subpart
+Tester \texttt{secante} avec $f(x) = x^2 - x - 1, x_0 = -1.0, x_1 = -0.5, \epsilon = 10^{-12}$
+\end{subparts}
+\end{parts}
+
+\question
+La {\bf méthode de dichotomie} suppose que $f$ est continue sur un intervalle $(a, b)$ et change de signe sur cet intervalle; on est donc assuré que $f$ possède un zéro sur cet intervalle. Ensuite on coupe $(a, b)$ en deux et on garde celui des deux intervalles où $f$ change de signe. On obtient donc un nouvel encadrement $a, b$ deux fois plus petit. On répète l'opération jusqu'à obtenir la précision souhaitée.
+\begin{parts}
+\part
+Ecrire une fonction python \texttt{dichotomie} qui prend en arguments une fonction $f$, deux valeurs initiales $a, b$, un réel positif $\epsilon$, et qui renvoie un encadrement $a, b$ d'une racine de la fonction $f$. Condition d'arrêt : $\vert b - a \vert < \epsilon$.
+\part Tests
+\begin{subparts}
+\subpart
+Tester \texttt{dichotomie} avec $f(x) = x^2 - x - 1, a = 1.5, b = 2.0, \epsilon = 10^{-12}$
+\subpart
+Tester \texttt{dichotomie} avec $f(x) = x^2 - x - 1, a = -1.0, b = 0.0, \epsilon = 10^{-12}$
+\end{subparts}
+\end{parts}
+
+\question
+Examinons maintenant la vitesse de convergence de ces méthodes. 
+\begin{parts}
+\part
+Dans chacune des méthodes, incorporer un compteur qui compte le nombre d'itérations \texttt{nbiter} effectuées et placer \texttt{nbiter} dans le return de la fonction. Par exemple, le return de la fonction \texttt{newton} s'écrira \texttt{return r, nbiter}. Lorsqu'on appelera \texttt{newton}, on écrira donc \texttt{r, nbiter = newton(f, df, x0, epsi)}
+\part
+Pour chacune des méthodes, faire varier la valeur de $\epsilon$ et compter le nombre d'itérations effectuées. Reporter les résultats dans un tableau, par exemple :\\
+\begin{center}
+\begin{tabular}{l | c c c c c}
+{} & $10^{-3}$ & $10^{-6}$ & $10^{-9}$ & $10^{-12}$ & $10^{-15}$ \\
+\hline
+\texttt{point\_fixe} & {} & {} & {} & {} & {} \\
+\texttt{newton} & {} & {} & {} & {} & {} \\
+\texttt{secante} & {} & {} & {} & {} & {} \\
+\texttt{dichotomie} & {} & {} & {} & {} & {} 
+\end{tabular}
+\end{center}
+\end{parts}
+
+\question
+Rédiger le compte-rendu du TP1, un compte-rendu par binôme, dans l'un des formats (que l'on pourra combiner, si besoin) :
+\begin{itemize}
+\item
+papier
+\item
+ipython notebook (extension .ipynb)
+\item
+latex (extension .tex)
+\item
+libreoffice (extension .odt)
+\end{itemize}
+
+\end{questions}
+
+\end{document}
+
+
+
