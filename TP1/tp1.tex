@@ -1,32 +1,47 @@
 \documentclass{exam}
 
 \usepackage[utf8]{inputenc}
-
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{amsfonts}
-
 \usepackage[francais]{babel}
+\usepackage{listings}
 
 \title{TP1\\ Résolution numérique de $f(x) = 0$}
 
 \begin{document}
 \maketitle
 
-
-On écrira le code dans un fichier \texttt{tp1.py}. Pour exécuter le code, ouvrir un terminal linux, saisir \texttt{ipython} et valider. Un terminal ipython se substitue au terminal linux; à l'intérieur saisir \texttt{run tp1.py} et valider.\\
+Tous les fichiers créés dans ce TP devront être rangés dans un dossier nommé TP1.
+On écrira le code dans un fichier nommé \texttt{tp1.c}.\\
 
 \begin{questions}
 
 \question
-Création d'une fonction simple et représentation graphique. Notions python abordées : fonction python \texttt{def}; module \texttt{matplotlib}.
+Création d'une fonction simple et écriture de ses valeurs dans un fichier texte.
 \begin{parts}
 \part
-Ecrire la fonction $f(x) = x^2 - x - 1$ sous forme d'une fonction python. 
+Créer une fonction \texttt{f} prenant en argument $x$, de type \texttt{double}, et renvoyant  $x^3 - 3x + 1$. 
 \part
-Représentation graphique sur l'intervalle $\left[-1, 2\right]$; utiliser le module \texttt{matplotlib.pyplot}
+Créer une fonction \texttt{write\_values} prenant en arguments $a, b, h$ , de type \texttt{double}, et qui écrit dans un fichier nommé \texttt{values.txt} tous les couples $x, f(x)$ (un couple par ligne), pour $x$ variant sur $[a, b]$ avec un pas de $h$.
 \part
-Observer la présence de deux zéros et en donner une estimation grossière.
+Ecrire la fonction main sous la forme
+\begin{lstlisting}[basicstyle=\small]
+int main(int argc, char *argv[]){
+	double a, b, h;
+	sscanf(argv[1], "%lf", &a);
+	sscanf(argv[2], "%lf", &b);
+	sscanf(argv[3], "%lf", &h);
+	write_values(a, b, h);
+	return EXIT_SUCCESS;
+}
+\end{lstlisting}
+\part
+En ligne de commande,\\
+compiler \texttt{tp1.c} sous la forme \texttt{gcc tp1.c -o tp1} et vérifier que l'exécutable \texttt{tp1} est créé,\\
+exécuter \texttt{./tp1 a b h}, avec $a, b, h$ des valeurs au choix; vérifierla création du fichier \texttt{values.txt}.
+\part
+Localiser les zéros de la fonction $f$ et en donner des encadrements à la précision $h=0.1$.
 \end{parts}
 
 \question
