@@ -48,8 +48,7 @@ A l'aide du fichier \texttt{values.txt}, donner des encadrements des zéros de $
 
 
 \question
-Programme \texttt{newton.c} : implémentation de la {\bf méthode de Newton}.
-%$g(x) = x - \frac{f(x)}{f'(x)}$.
+Programme \texttt{newton.c} : {\bf méthode de Newton}.
 \begin{parts}
 \part
 Soit $f$ une fonction quelconque et $x_0$ un réel, appelé valeur initiale; soit $T$ la tangente à la courbe représentative de $f$, au point $(x_0, f(x_0))$; $T$ coupe l'axe des $x$ au point d'abscisse $x_1$; exprimer $x_1$ à l'aide des quantités $x_0, f(x_0), f'(x_0)$.
@@ -57,45 +56,62 @@ Soit $f$ une fonction quelconque et $x_0$ un réel, appelé valeur initiale; soi
 Illustrer la construction ci-dessus sur un dessin avec $f(x) = x^3 - 3x + 1$ et $x_0 = 2.0$; que vaut $x_1$ ?
 \part
 La méthode de Newton consiste à prendre $x_1$ comme nouvelle valeur initiale, et à répéter le processus ci-dessus; on obtient ainsi des valeurs $x_2, x_3, \cdots$, etc; sur le dessin précédent, vers quoi semble converger la suite $x_n$ ?
-
 \part
 Dans \texttt{newton.c}, écrire une fonction \texttt{f} prenant en argument $x$, de type \texttt{double} et renvoyant  $x^3 - 3x + 1$, puis écrire une fonction \texttt{df} représentant la dérivée de $f$.
-
 \part
 Ecrire une fonction \texttt{newton} qui prend en arguments  $x_0, \epsilon$, de type \texttt{double} et qui écrit dans un fichier nommé \texttt{newton.txt} les couples $x_n, \lvert x_n - x_{n-1} \rvert$ (un couple par ligne; la quantité $\lvert x_n - x_{n-1} \rvert$ s'appelle erreur de la méthode de Newton à l'étape $n$); condition d'arrêt : $\lvert x_n - x_{n-1} \rvert < \epsilon$; la première ligne, correspondant à $n = 0$, ne contiendra que la valeur $x_0$.
+\part
+Compiler \texttt{gcc newton.c -o newton}; exécuter \texttt{./newton x0 epsilon} pour différentes valeurs de \texttt{x0 epsilon} et vérifier vos résultats dans le fichier \texttt{newton.txt}.
 \end{parts}
 
 \question
-Toujours à la recherche des zéros de $f$, la {\bf méthode de la sécante} est une méthode itérative où chaque approximation est construite à partir des deux approximations précédentes. On doit donc partir de deux valeurs initiales distinctes, $x_0, x_1$ (en général les bornes d'un encadrement de la racine cherchée), puis on calcule par récurrence les termes de la suite $x_{n+1} = x_n - \frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}f(x_n)$. L'avantage sur la méthode de Newton est qu'on n'a pas besoin de la dérivée de $f$.
+Programme \texttt{newton\_numdiff.c} : méthode de Newton avec {\bf dérivée numérique}.\\
+Pour éviter le calcul à la main de la dérivée de $f$, qui peut s'avérer difficile, voire impossible, on peut utiliser l'approximation mathématique 
+\begin{equation}
+\label{numdiff}
+f'(x) \approx \frac{f(x+h) - f(x-h)}{2h}
+\end{equation}
+ où $h$ est un réel positif fixé.
 \begin{parts}
 \part
-Vérifier algébriquement que les points fixes de $g$ sont les zéros de $f$.
+Sauvegarder le programme \texttt{newton.c} en un programme \texttt{newton\_numdiff.c}
 \part
-Interpréter géométriquement la méthode de la sécante.
+Dans \texttt{newton\_numdiff.c}, supprimer la fonction \texttt{df} et ajouter la constante \texttt{h = 1.0E-8}.
 \part
-Ecrire une fonction python \texttt{secante} qui prend en arguments une fonction $f$, deux valeurs initiales $x_0, x_1$, un réel positif $\epsilon$, et qui renvoie une approximation $r$ d'une racine de la fonction $f$. Condition d'arrêt : $\vert x_{n+1} - x_n \vert < \epsilon$.
-\part Tests
-\begin{subparts}
-\subpart
-Tester \texttt{secante} avec $f(x) = x^2 - x - 1, x_0 = 1.5, x_1 = 2.0, \epsilon = 10^{-12}$
-\subpart
-Tester \texttt{secante} avec $f(x) = x^2 - x - 1, x_0 = -1.0, x_1 = -0.5, \epsilon = 10^{-12}$
-\end{subparts}
+Modifier la fonction \texttt{newton} en accord avec l'approximation (\ref{numdiff}); les résultats du calcul seront écrits dans un fichier \texttt{newton\_numdiff.txt}.
+
+\part
+Compiler et exécuter \texttt{newton\_numdiff} et comparer les résultats avec ceux de \texttt{newton}.
 \end{parts}
 
+
+
+
 \question
-La {\bf méthode de dichotomie} suppose que $f$ est continue sur un intervalle $(a, b)$ et change de signe sur cet intervalle; on est donc assuré que $f$ possède un zéro sur cet intervalle. Ensuite on coupe $(a, b)$ en deux et on garde celui des deux intervalles où $f$ change de signe. On obtient donc un nouvel encadrement $a, b$ deux fois plus petit. On répète l'opération jusqu'à obtenir la précision souhaitée.
+Programme \texttt{dichotomie.c} : la {\bf méthode de dichotomie} suppose que $f$ est continue sur un intervalle $(a, b)$ et change de signe sur l'intervalle; on est donc assuré que $f$ possède un zéro sur cet intervalle. Ensuite on coupe l'intervalle $(a, b)$ en deux et on garde celui des deux intervalles où $f$ change de signe. On obtient donc un nouvel encadrement $(a, b)$ deux fois plus petit. On répète l'opération jusqu'à obtenir la précision souhaitée.
 \begin{parts}
 \part
-Ecrire une fonction python \texttt{dichotomie} qui prend en arguments une fonction $f$, deux valeurs initiales $a, b$, un réel positif $\epsilon$, et qui renvoie un encadrement $a, b$ d'une racine de la fonction $f$. Condition d'arrêt : $\vert b - a \vert < \epsilon$.
-\part Tests
-\begin{subparts}
-\subpart
-Tester \texttt{dichotomie} avec $f(x) = x^2 - x - 1, a = 1.5, b = 2.0, \epsilon = 10^{-12}$
-\subpart
-Tester \texttt{dichotomie} avec $f(x) = x^2 - x - 1, a = -1.0, b = 0.0, \epsilon = 10^{-12}$
-\end{subparts}
+Ecrire une fonction \texttt{dichotomie} qui prend en arguments \texttt{a, b, epsilon} de type \texttt{double} et qui écrit dans un fichier \texttt{dichotomie.txt} les encadrements successifs $(a, b)$ - un couple par ligne; condition d'arrêt : $\lvert b - a \rvert < \epsilon$.
+\part
+Compiler \texttt{gcc dichotomie.c -o dichotomie}; exécuter \texttt{./dichotomie a b epsilon} pour différentes valeurs de \texttt{a b epsilon} et vérifier vos résultats dans le fichier \texttt{dichotomie.txt}.
 \end{parts}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \question
 Examinons maintenant la vitesse de convergence de ces méthodes. 
