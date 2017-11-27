@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.4.27)  27 NOV 2017 15:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.4.27)  27 NOV 2017 18:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -605,18 +605,18 @@ n/10 pour diff^^Serentes
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 122--123
+Underfull \hbox (badness 10000) in paragraph at lines 101--102
 
  []
 
 [2]
-This exam contains 6 questions with 20 parts, 0 subparts, and 0 subsubparts.
+This exam contains 5 questions with 18 parts, 0 subparts, and 0 subsubparts.
 (./tp1.aux) ) 
 Here is how much of TeX's memory you used:
- 5288 strings out of 493029
- 66980 string characters out of 6136234
- 149465 words of memory out of 5000000
- 8799 multiletter control sequences out of 15000+600000
+ 5276 strings out of 493029
+ 66816 string characters out of 6136234
+ 149417 words of memory out of 5000000
+ 8787 multiletter control sequences out of 15000+600000
  12560 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  29i,9n,32p,509b,1439s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -633,7 +633,7 @@ nts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type
 nts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.
 pfb>
-Output written on tp1.pdf (2 pages, 144564 bytes).
+Output written on tp1.pdf (2 pages, 142856 bytes).
 PDF statistics:
  63 PDF objects out of 1000 (max. 8388607)
  45 compressed objects within 1 object stream

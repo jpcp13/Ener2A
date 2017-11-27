@@ -43,7 +43,7 @@ On dira que \texttt{main} prend en arguments $a, b, h$.
 \part
 En ligne de commande, compiler \texttt{values.c} sous la forme \texttt{gcc values.c -o values} et vérifier que l'exécutable \texttt{values} est créé, puis exécuter \texttt{./values a b h}, avec $a, b, h$ des valeurs au choix; vérifier la création du fichier \texttt{values.txt}.
 \part
-A l'aide du fichier \texttt{values.txt}, donner des encadrements des zéros de $f$ à la précision $h=0.01$.
+A l'aide du fichier \texttt{values.txt}, donner des encadrements des zéros de $f$ à la précision $h=0.1$.
 \end{parts}
 
 
@@ -97,53 +97,17 @@ Compiler \texttt{gcc dichotomie.c -o dichotomie}; exécuter \texttt{./dichotomie
 \end{parts}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \question
-Examinons maintenant la vitesse de convergence de ces méthodes. 
-\begin{parts}
-\part
-Dans chacune des méthodes, incorporer un compteur qui compte le nombre d'itérations \texttt{nbiter} effectuées et placer \texttt{nbiter} dans le return de la fonction. Par exemple, le return de la fonction \texttt{newton} s'écrira \texttt{return r, nbiter}. Lorsqu'on appelera \texttt{newton}, on écrira donc \texttt{r, nbiter = newton(f, df, x0, epsi)}
-\part
-Pour chacune des méthodes, faire varier la valeur de $\epsilon$ et compter le nombre d'itérations effectuées. Reporter les résultats dans un tableau, par exemple :\\
+Pour chacune des deux méthodes, faire varier la valeur de $\epsilon$ et compter le nombre d'itérations effectuées, reporter les résultats dans le tableau :\\
 \begin{center}
-\begin{tabular}{l | c c c c c}
-{} & $10^{-3}$ & $10^{-6}$ & $10^{-9}$ & $10^{-12}$ & $10^{-15}$ \\
+\begin{tabular}{r | c c c c c}
+{$\epsilon$} & $10^{-3}$ & $10^{-6}$ & $10^{-9}$ & $10^{-12}$ & $10^{-15}$ \\
 \hline
-\texttt{point\_fixe} & {} & {} & {} & {} & {} \\
 \texttt{newton} & {} & {} & {} & {} & {} \\
-\texttt{secante} & {} & {} & {} & {} & {} \\
 \texttt{dichotomie} & {} & {} & {} & {} & {} 
 \end{tabular}
 \end{center}
-\end{parts}
 
-\question
-Rédiger le compte-rendu du TP1, un compte-rendu par binôme, dans l'un des formats (que l'on pourra combiner, si besoin) :
-\begin{itemize}
-\item
-papier
-\item
-ipython notebook (extension .ipynb)
-\item
-latex (extension .tex)
-\item
-libreoffice (extension .odt)
-\end{itemize}
 
 \end{questions}
 
