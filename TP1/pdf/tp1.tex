@@ -1,6 +1,7 @@
 \documentclass{exam}
 
 \usepackage[utf8]{inputenc}
+\usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{amsfonts}
@@ -18,14 +19,16 @@ On écrira le code dans un fichier nommé \texttt{tp1.c}.\\
 \begin{questions}
 
 \question
-Création d'une fonction simple et écriture de ses valeurs dans un fichier texte.
+Programme \texttt{values.c} : création d'une fonction simple et écriture de ses valeurs dans un fichier texte.
 \begin{parts}
 \part
-Créer une fonction \texttt{f} prenant en argument $x$, de type \texttt{double}, et renvoyant  $x^3 - 3x + 1$. 
+dessiner sur papier la fonction $f(x) = x^3 - 3x + 1$ et localiser approximativement ses zéros.
 \part
-Créer une fonction \texttt{write\_values} prenant en arguments $a, b, h$ , de type \texttt{double}, et qui écrit dans un fichier nommé \texttt{values.txt} tous les couples $x, f(x)$ (un couple par ligne), pour $x$ variant sur $[a, b]$ avec un pas de $h$.
+Dans \texttt{values.c}, écrire une fonction \texttt{f} prenant en argument $x$, de type \texttt{double}, et renvoyant  $x^3 - 3x + 1$. 
 \part
-Ecrire la fonction main sous la forme
+Ecrire une fonction \texttt{write\_values} prenant en arguments $a, b, h$ , de type \texttt{double}, et qui écrit dans un fichier nommé \texttt{values.txt} tous les couples $x, f(x)$ (un couple par ligne), pour $x$ variant sur $[a, b]$ avec un pas de $h$.
+\part
+Ecrire la fonction \texttt{main} sous la forme
 \begin{lstlisting}[basicstyle=\small]
 int main(int argc, char *argv[]){
 	double a, b, h;
@@ -36,61 +39,30 @@ int main(int argc, char *argv[]){
 	return EXIT_SUCCESS;
 }
 \end{lstlisting}
+On dira que \texttt{main} prend en arguments $a, b, h$.
 \part
-En ligne de commande,\\
-compiler \texttt{tp1.c} sous la forme \texttt{gcc tp1.c -o tp1} et vérifier que l'exécutable \texttt{tp1} est créé,\\
-exécuter \texttt{./tp1 a b h}, avec $a, b, h$ des valeurs au choix; vérifierla création du fichier \texttt{values.txt}.
+En ligne de commande, compiler \texttt{values.c} sous la forme \texttt{gcc values.c -o values} et vérifier que l'exécutable \texttt{values} est créé, puis exécuter \texttt{./values a b h}, avec $a, b, h$ des valeurs au choix; vérifier la création du fichier \texttt{values.txt}.
 \part
-Localiser les zéros de la fonction $f$ et en donner des encadrements à la précision $h=0.1$.
-\end{parts}
-
-\question
-Recherche d'un zéro d'une fonction au moyen de la {\bf méthode du point fixe}; notion python abordée : boucle \texttt{for}.
-\begin{parts}
-\part
-Vérifier algébriquement que les points fixes de $g$ sont les zéros de $f$. Ecrire la fonction $g(x) = 1 + 1/x$ sous forme d'une fonction python.
-\part
-Calculer les $25$ premiers termes de la suite définie par $x_{n+1} = g(x_n)$ et $x_0 = 1.0$ et enregistrer ces termes dans une liste.
-\part
-Observer la convergence de cette suite vers l'un des deux zéros de $f$.
-\part
-Dessiner, sur papier en repère orthonormé, la fonction $g$ ainsi que la première bisectrice. Expliquer à partir du graphique la convergence observée.
-\end{parts}
-
-\question
-Implémentation d'une fonction python \texttt{point\_fixe}. Notions python abordées : boucle \texttt{while}; aspect fonctionnel de python, c'est-à-dire qu'une fonction peut prendre en argument une fonction. Notion mathématique abordée : point fixe attractif, point fixe répulsif.
-\begin{parts}
-\part
-Ecrire une fonction python \texttt{point\_fixe} qui prend en arguments une fonction $g$, une valeur initiale $x_0$, un réel positif $\epsilon$, et qui renvoie une approximation $r$ d'un point fixe de la fonction $g$. Condition d'arrêt : $\vert x_{n+1} - x_n \vert < \epsilon$
-\part Tests
-\begin{subparts}
-\subpart
-Tester \texttt{point\_fixe} avec $g(x) = 1 + 1/x, x_0 = 1.6, \epsilon = 10^{-12}$. Vers quelle racine y-a-t'il convergence ?
-\subpart
-Tester \texttt{point\_fixe} avec $g(x) = 1 + 1/x, x_0 = -0.6, \epsilon = 10^{-12}$. Vers quelle racine y-a-t'il convergence ?
-\subpart 
-Sur le graphique, examiner la pente de $g$ aux points fixes. Un point fixe $r$ d'une fonction $g$ tel que $\vert g'(r) \vert < 1$ est dit attractif; si $\vert g'(r) \vert > 1$ il est dit répulsif. A partir de ça, expliquer le résultat des tests ci-dessus.
-\end{subparts}
+A l'aide du fichier \texttt{values.txt}, donner des encadrements des zéros de $f$ à la précision $h=0.01$.
 \end{parts}
 
 
 \question
-On veut, ici encore, calculer un zéro d'une fonction $f$. La {\bf méthode de Newton} consiste à appliquer la méthode du point fixe à la fonction 
-$g(x) = x - \frac{f(x)}{f'(x)}$.
+Programme \texttt{newton.c} : implémentation de la {\bf méthode de Newton}.
+%$g(x) = x - \frac{f(x)}{f'(x)}$.
 \begin{parts}
 \part
-Vérifier algébriquement que les points fixes de $g$ sont les zéros de $f$.
+Soit $f$ une fonction quelconque et $x_0$ un réel, appelé valeur initiale; soit $T$ la tangente à la courbe représentative de $f$, au point $(x_0, f(x_0))$; $T$ coupe l'axe des $x$ au point d'abscisse $x_1$; exprimer $x_1$ à l'aide des quantités $x_0, f(x_0), f'(x_0)$.
 \part
-Interpréter géométriquement la méthode de Newton.
+Illustrer la construction ci-dessus sur un dessin avec $f(x) = x^3 - 3x + 1$ et $x_0 = 2.0$; que vaut $x_1$ ?
 \part
-Ecrire une fonction python \texttt{newton} qui prend en arguments une fonction $f$, sa dérivée $df$, une valeur initiale $x_0$, un réel positif $\epsilon$, et qui renvoie une approximation $r$ d'une racine de la fonction $f$. Condition d'arrêt : $\vert x_{n+1} - x_n \vert < \epsilon$.
-\part Tests
-\begin{subparts}
-\subpart
-Tester \texttt{newton} avec $f(x) = x^2 - x - 1, x_0 = 1.0, \epsilon = 10^{-12}$
-\subpart
-Tester \texttt{newton} avec $f(x) = x^2 - x - 1, x_0 = -1.0, \epsilon = 10^{-12}$
-\end{subparts}
+La méthode de Newton consiste à prendre $x_1$ comme nouvelle valeur initiale, et à répéter le processus ci-dessus; on obtient ainsi des valeurs $x_2, x_3, \cdots$, etc; sur le dessin précédent, vers quoi semble converger la suite $x_n$ ?
+
+\part
+Dans \texttt{newton.c}, écrire une fonction \texttt{f} prenant en argument $x$, de type \texttt{double} et renvoyant  $x^3 - 3x + 1$, puis écrire une fonction \texttt{df} représentant la dérivée de $f$.
+
+\part
+Ecrire une fonction \texttt{newton} qui prend en arguments  $x_0, \epsilon$, de type \texttt{double} et qui écrit dans un fichier nommé \texttt{newton.txt} les couples $x_n, \lvert x_n - x_{n-1} \rvert$ (un couple par ligne; la quantité $\lvert x_n - x_{n-1} \rvert$ s'appelle erreur de la méthode de Newton à l'étape $n$); condition d'arrêt : $\lvert x_n - x_{n-1} \rvert < \epsilon$; la première ligne, correspondant à $n = 0$, ne contiendra que la valeur $x_0$.
 \end{parts}
 
 \question
