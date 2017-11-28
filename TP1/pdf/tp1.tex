@@ -8,13 +8,10 @@
 \usepackage[francais]{babel}
 \usepackage{listings}
 
-\title{TP1\\ Résolution numérique de $f(x) = 0$}
+\title{TP1 : Résolution numérique de $f(x) = 0$}
 
 \begin{document}
 \maketitle
-
-Tous les fichiers créés dans ce TP devront être rangés dans un dossier nommé TP1.
-On écrira le code dans un fichier nommé \texttt{tp1.c}.\\
 
 \begin{questions}
 
@@ -26,24 +23,13 @@ dessiner sur papier la fonction $f(x) = x^3 - 3x + 1$ et localiser approximative
 \part
 Dans \texttt{values.c}, écrire une fonction \texttt{f} prenant en argument $x$, de type \texttt{double}, et renvoyant  $x^3 - 3x + 1$. 
 \part
-Ecrire une fonction \texttt{write\_values} prenant en arguments $a, b, h$ , de type \texttt{double}, et qui écrit dans un fichier nommé \texttt{values.txt} tous les couples $x, f(x)$ (un couple par ligne), pour $x$ variant sur $[a, b]$ avec un pas de $h$.
+Ecrire une fonction \texttt{write\_values} prenant en arguments \texttt{a, b, h}, de type \texttt{double}, et qui écrit dans un fichier nommé \texttt{values.txt} les couples $x, f(x)$ - un couple par ligne -, pour $x$ variant sur $[a, b]$ avec un pas de $h$.
 \part
-Ecrire la fonction \texttt{main} sous la forme
-\begin{lstlisting}[basicstyle=\small]
-int main(int argc, char *argv[]){
-	double a, b, h;
-	sscanf(argv[1], "%lf", &a);
-	sscanf(argv[2], "%lf", &b);
-	sscanf(argv[3], "%lf", &h);
-	write_values(a, b, h);
-	return EXIT_SUCCESS;
-}
-\end{lstlisting}
-On dira que \texttt{main} prend en arguments $a, b, h$.
+Ecrire une fonction \texttt{main} prenant en arguments \texttt{a, b, h} (ces arguments seront passés en ligne de commande au moment de l'exécution du programme); la fonction \texttt{main} fera ensuite appel à \texttt{write\_values} avec les arguments \texttt{a, b, h}.
 \part
-En ligne de commande, compiler \texttt{values.c} sous la forme \texttt{gcc values.c -o values} et vérifier que l'exécutable \texttt{values} est créé, puis exécuter \texttt{./values a b h}, avec $a, b, h$ des valeurs au choix; vérifier la création du fichier \texttt{values.txt}.
+En ligne de commande, compiler \texttt{values.c} sous la forme \texttt{gcc values.c -o values}, vérifier que le fichier exécutable \texttt{values} est créé, puis exécuter \texttt{./values a b h}, avec $a, b, h$ des valeurs au choix; vérifier la création du fichier \texttt{values.txt}.
 \part
-A l'aide du fichier \texttt{values.txt}, donner des encadrements des zéros de $f$ à la précision $h=0.1$.
+Examiner le contenu du fichier \texttt{values.txt} et donner des encadrements des zéros de $f$ à la précision $h=0.1$.
 \end{parts}
 
 
@@ -57,11 +43,11 @@ Illustrer la construction ci-dessus sur un dessin avec $f(x) = x^3 - 3x + 1$ et 
 \part
 La méthode de Newton consiste à prendre $x_1$ comme nouvelle valeur initiale, et à répéter le processus ci-dessus; on obtient ainsi des valeurs $x_2, x_3, \cdots$, etc; sur le dessin précédent, vers quoi semble converger la suite $x_n$ ?
 \part
-Dans \texttt{newton.c}, écrire une fonction \texttt{f} prenant en argument $x$, de type \texttt{double} et renvoyant  $x^3 - 3x + 1$, puis écrire une fonction \texttt{df} représentant la dérivée de $f$.
+Dans \texttt{newton.c}, écrire la fonction \texttt{f} habituelle, puis écrire la fonction \texttt{df} représentant la dérivée de $f$.
 \part
-Ecrire une fonction \texttt{newton} qui prend en arguments  $x_0, \epsilon$, de type \texttt{double} et qui écrit dans un fichier nommé \texttt{newton.txt} les couples $x_n, \lvert x_n - x_{n-1} \rvert$ (un couple par ligne; la quantité $\lvert x_n - x_{n-1} \rvert$ s'appelle erreur de la méthode de Newton à l'étape $n$); condition d'arrêt : $\lvert x_n - x_{n-1} \rvert < \epsilon$; la première ligne, correspondant à $n = 0$, ne contiendra que la valeur $x_0$.
+Ecrire une fonction \texttt{newton} qui prend en arguments  \texttt{x0, epsilon}, de type \texttt{double} et qui écrit dans un fichier nommé \texttt{newton.txt} les couples $x_n, \lvert x_n - x_{n-1} \rvert$ - un couple par ligne - (la quantité $\lvert x_n - x_{n-1} \rvert$ s'appelle erreur de la méthode de Newton à l'étape $n$). Condition d'arrêt : $\lvert x_n - x_{n-1} \rvert < \epsilon$; la première ligne, correspondant à $n = 0$, ne contiendra que la valeur $x_0$.
 \part
-Compiler \texttt{gcc newton.c -o newton}; exécuter \texttt{./newton x0 epsilon} pour différentes valeurs de \texttt{x0 epsilon} et vérifier vos résultats dans le fichier \texttt{newton.txt}.
+Compiler \texttt{gcc newton.c -o newton}, exécuter \texttt{./newton x0 epsilon} pour différentes valeurs de \texttt{x0 epsilon} et vérifier vos résultats dans le fichier \texttt{newton.txt}.
 \end{parts}
 
 \question
@@ -74,7 +60,7 @@ f'(x) \approx \frac{f(x+h) - f(x-h)}{2h}
  où $h$ est un réel positif fixé.
 \begin{parts}
 \part
-Sauvegarder le programme \texttt{newton.c} en un programme \texttt{newton\_numdiff.c}
+Sauvegarder le programme \texttt{newton.c} dans un fichier \texttt{newton\_numdiff.c}
 \part
 Dans \texttt{newton\_numdiff.c}, supprimer la fonction \texttt{df} et ajouter la constante \texttt{h = 1.0E-8}.
 \part
@@ -84,7 +70,20 @@ Modifier la fonction \texttt{newton} en accord avec l'approximation (\ref{numdif
 Compiler et exécuter \texttt{newton\_numdiff} et comparer les résultats avec ceux de \texttt{newton}.
 \end{parts}
 
-
+\question
+Programme \texttt{secante.c} : {\bf méthode de la sécante}.
+\begin{parts}
+\part
+Soit $f$ une fonction et $x_0, x_1$ deux réels distincts - les valeurs initiales; soit $T$ la droite - appelée sécante - s'appuyant sur les points $(x_0, f(x_0))$ et $(x_1, f(x_1))$; $T$ coupe l'axe des $x$ au point d'abscisse $x_2$; exprimer $x_2$ à l'aide des quantités $x_0, f(x_0), x_1, f(x_1)$.
+\part
+Illustrer cette construction avec $f(x) = x^3 - 3x + 1$ et $x_0 = 1.0, x_1 = 2$; que vaut $x_2$ ?
+\part
+La méthode de la sécante consiste à prendre $x_1, x_2$ comme nouvelles valeurs initiales, et à répéter le processus; on obtient ainsi des valeurs $x_2, x_3, \cdots$, etc; sur le dessin précédent, vers quoi semble converger la suite $x_n$ ?
+\part
+Dans \texttt{secante.c}, outre la fonction \texttt{f}, écrire une fonction \texttt{secante} qui prend en arguments  \texttt{x0, x1, epsilon} et qui écrit dans un fichier \texttt{secante.txt} les couples $x_n, \lvert x_n - x_{n-1} \rvert$ - un couple par ligne -. Condition d'arrêt : $\lvert x_n - x_{n-1} \rvert < \epsilon$.
+\part
+Compiler \texttt{gcc secante.c -o secante}, exécuter \texttt{./secante x0 x1 epsilon} pour différentes valeurs \texttt{x0 x1 epsilon} et vérifier vos résultats dans \texttt{secante.txt}.
+\end{parts}
 
 
 \question
@@ -98,17 +97,21 @@ Compiler \texttt{gcc dichotomie.c -o dichotomie}; exécuter \texttt{./dichotomie
 
 
 \question
-Pour chacune des deux méthodes, faire varier la valeur de $\epsilon$ et compter le nombre d'itérations effectuées, reporter les résultats dans le tableau :\\
+\begin{parts}
+\part
+Pour chacune des méthodes présentées, faire varier la valeur de $\epsilon$ et compter le nombre d'itérations effectuées; reporter les résultats dans le tableau :
 \begin{center}
 \begin{tabular}{r | c c c c c}
 {$\epsilon$} & $10^{-3}$ & $10^{-6}$ & $10^{-9}$ & $10^{-12}$ & $10^{-15}$ \\
 \hline
 \texttt{newton} & {} & {} & {} & {} & {} \\
+\texttt{sécante} & {} & {} & {} & {} & {} \\
 \texttt{dichotomie} & {} & {} & {} & {} & {} 
 \end{tabular}
 \end{center}
-
-
+\part
+Rédiger un court compte-rendu, contenant explications, commentaires, dessins, table.
+\end{parts}
 \end{questions}
 
 \end{document}
