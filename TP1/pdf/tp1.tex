@@ -34,6 +34,23 @@ Examiner le contenu du fichier \texttt{values.txt} et donner des encadrements de
 
 
 \question
+Programme \texttt{dichotomie.c} : Soit $f$ une fonction continue sur un intervalle $(a, b)$; la {\bf méthode de dichotomie} suppose que $f$ change de signe sur l'intervalle; on est donc assuré que $f$ possède un zéro sur cet intervalle. Ensuite on coupe l'intervalle $(a, b)$ en deux et on garde celui des deux intervalles où $f$ change de signe. On obtient donc un nouvel encadrement $(a, b)$ deux fois plus petit. On répète l'opération jusqu'à obtenir la précision souhaitée.
+\begin{parts}
+\part
+Illustrer quelques étapes de la construction précédente sur un dessin avec $f(x) = x^3 - 3x + 1$.
+\part
+\begin{subparts}
+\subpart
+Dans \texttt{dichotomie.c}, écrire la fonction \texttt{f} ci-dessus.
+\subpart
+Ecrire une fonction \texttt{dichotomie} qui prend en arguments \texttt{a, b, epsilon} de type \texttt{double} et qui écrit dans un fichier \texttt{dichotomie.txt} les encadrements successifs $(a, b)$ - un couple par ligne; condition d'arrêt : $\lvert b - a \rvert < \epsilon$.
+\end{subparts}
+\part
+Compiler \texttt{gcc dichotomie.c -o dichotomie}, exécuter \texttt{./dichotomie a b epsilon} pour différentes valeurs de \texttt{a b epsilon} et vérifier vos résultats dans le fichier \texttt{dichotomie.txt}.
+\end{parts}
+
+
+\question
 Programme \texttt{newton.c} : {\bf méthode de Newton}.
 \begin{parts}
 \part
@@ -43,7 +60,7 @@ Illustrer la construction ci-dessus sur un dessin avec $f(x) = x^3 - 3x + 1$ et 
 \part
 La méthode de Newton consiste à prendre $x_1$ comme nouvelle valeur initiale, et à répéter le processus ci-dessus; on obtient ainsi des valeurs $x_2, x_3, \cdots$, etc; sur le dessin précédent, vers quoi semble converger la suite $x_n$ ?
 \part
-Dans \texttt{newton.c}, écrire la fonction \texttt{f} habituelle, puis écrire la fonction \texttt{df} représentant la dérivée de $f$.
+Dans \texttt{newton.c}, écrire la fonction \texttt{f} habituelle, puis écrire la fonction \texttt{df}, dérivée de $f$.
 \part
 Ecrire une fonction \texttt{newton} qui prend en arguments  \texttt{x0, epsilon}, de type \texttt{double} et qui écrit dans un fichier nommé \texttt{newton.txt} les couples $x_n, \lvert x_n - x_{n-1} \rvert$ - un couple par ligne - (la quantité $\lvert x_n - x_{n-1} \rvert$ s'appelle erreur de la méthode de Newton à l'étape $n$). Condition d'arrêt : $\lvert x_n - x_{n-1} \rvert < \epsilon$; la première ligne, correspondant à $n = 0$, ne contiendra que la valeur $x_0$.
 \part
@@ -76,37 +93,29 @@ Programme \texttt{secante.c} : {\bf méthode de la sécante}.
 \part
 Soit $f$ une fonction et $x_0, x_1$ deux réels distincts - les valeurs initiales; soit $T$ la droite - appelée sécante - s'appuyant sur les points $(x_0, f(x_0))$ et $(x_1, f(x_1))$; $T$ coupe l'axe des $x$ au point d'abscisse $x_2$; exprimer $x_2$ à l'aide des quantités $x_0, f(x_0), x_1, f(x_1)$.
 \part
-Illustrer cette construction avec $f(x) = x^3 - 3x + 1$ et $x_0 = 1.0, x_1 = 2$; que vaut $x_2$ ?
+Illustrer cette construction avec $f(x) = x^3 - 3x + 1$ et $x_0 = 1.0, x_1 = 2.0$; que vaut $x_2$ ?
 \part
 La méthode de la sécante consiste à prendre $x_1, x_2$ comme nouvelles valeurs initiales, et à répéter le processus; on obtient ainsi des valeurs $x_2, x_3, \cdots$, etc; sur le dessin précédent, vers quoi semble converger la suite $x_n$ ?
 \part
-Dans \texttt{secante.c}, outre la fonction \texttt{f}, écrire une fonction \texttt{secante} qui prend en arguments  \texttt{x0, x1, epsilon} et qui écrit dans un fichier \texttt{secante.txt} les couples $x_n, \lvert x_n - x_{n-1} \rvert$ - un couple par ligne -. Condition d'arrêt : $\lvert x_n - x_{n-1} \rvert < \epsilon$.
+Dans \texttt{secante.c}, outre la fonction \texttt{f}, écrire une fonction \texttt{secante} qui prend en arguments  \texttt{x0, x1, epsilon} et qui écrit dans un fichier \texttt{secante.txt} les couples $x_n, \lvert x_n - x_{n-1} \rvert$. Condition d'arrêt : $\lvert x_n - x_{n-1} \rvert < \epsilon$.
 \part
 Compiler \texttt{gcc secante.c -o secante}, exécuter \texttt{./secante x0 x1 epsilon} pour différentes valeurs \texttt{x0 x1 epsilon} et vérifier vos résultats dans \texttt{secante.txt}.
 \end{parts}
 
 
-\question
-Programme \texttt{dichotomie.c} : la {\bf méthode de dichotomie} suppose que $f$ est continue sur un intervalle $(a, b)$ et change de signe sur l'intervalle; on est donc assuré que $f$ possède un zéro sur cet intervalle. Ensuite on coupe l'intervalle $(a, b)$ en deux et on garde celui des deux intervalles où $f$ change de signe. On obtient donc un nouvel encadrement $(a, b)$ deux fois plus petit. On répète l'opération jusqu'à obtenir la précision souhaitée.
-\begin{parts}
-\part
-Ecrire une fonction \texttt{dichotomie} qui prend en arguments \texttt{a, b, epsilon} de type \texttt{double} et qui écrit dans un fichier \texttt{dichotomie.txt} les encadrements successifs $(a, b)$ - un couple par ligne; condition d'arrêt : $\lvert b - a \rvert < \epsilon$.
-\part
-Compiler \texttt{gcc dichotomie.c -o dichotomie}; exécuter \texttt{./dichotomie a b epsilon} pour différentes valeurs de \texttt{a b epsilon} et vérifier vos résultats dans le fichier \texttt{dichotomie.txt}.
-\end{parts}
-
 
 \question
 \begin{parts}
 \part
-Pour chacune des méthodes présentées, faire varier la valeur de $\epsilon$ et compter le nombre d'itérations effectuées; reporter les résultats dans le tableau :
+Choisir un zéro de $f$; pour chacune des méthodes présentées, fixer des valeurs initiales, faire varier la valeur de $\epsilon$ et compter le nombre d'itérations effectuées; reporter les résultats dans le tableau :
 \begin{center}
 \begin{tabular}{r | c c c c c}
 {$\epsilon$} & $10^{-3}$ & $10^{-6}$ & $10^{-9}$ & $10^{-12}$ & $10^{-15}$ \\
 \hline
+\texttt{dichotomie} & {} & {} & {} & {} & {} \\
 \texttt{newton} & {} & {} & {} & {} & {} \\
-\texttt{sécante} & {} & {} & {} & {} & {} \\
-\texttt{dichotomie} & {} & {} & {} & {} & {} 
+\texttt{sécante} & {} & {} & {} & {} & {} 
+
 \end{tabular}
 \end{center}
 \part
