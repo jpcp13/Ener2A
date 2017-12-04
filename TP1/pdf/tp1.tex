@@ -103,7 +103,6 @@ Compiler \texttt{gcc secante.c -o secante}, exécuter \texttt{./secante x0 x1 ep
 \end{parts}
 
 
-
 \question
 \begin{parts}
 \part
@@ -121,8 +120,48 @@ Choisir un zéro de $f$; pour chacune des méthodes présentées, fixer des vale
 \part
 Rédiger un court compte-rendu, contenant explications, commentaires, dessins, table.
 \end{parts}
-\end{questions}
 
+
+
+\question
+Programme \texttt{newton2.c} : {\bf méthode de Newton, multi-dimensionnelle}.\\
+Dans cette partie nous montrons comment généraliser la méthode de Newton pour calculer un zéro d'un sytème de plusieurs équations à plusieurs inconnues.
+\begin{parts}
+ 
+\part
+Dans cet exemple, on considère un système de deux équations à deux inconnues $x_0, x_1$; on posera \texttt{X} = $(x_0, x_1)$.
+Dans \texttt{newton2.c}, écrire la fonction \texttt{f} définie par $f(x_0, x_1) = (x_0^2 + 2x_1^2 - 1.0, x_0x_1)$; la fonction \texttt{f} prendra en argument \texttt{X}, et retournera \texttt{fX}; \texttt{X} et \texttt{fX} sont des \texttt{arrays} de longueur $2$ et de type \texttt{double}.
+
+\part
+Ecrire la fonction \texttt{df}, dérivée de $f$; mathématiquement, la dérivée de $f$ au point $(x_0, x_1)$ est la matrice 
+$df(x) = \begin{pmatrix}
+\frac{\partial f_0}{\partial x_0} & \frac{\partial f_0}{\partial x_1} \\
+\frac{\partial f_1}{\partial x_0} & \frac{\partial f_1}{\partial x_1} 
+\end{pmatrix}$
+avec $f_0 = x_0^2 + 2x_1^2 - 1.0, f_1 = x_0x_1$; la fonction \texttt{df} prendra en argument \texttt{X} et retournera \texttt{dfX}, avec \texttt{dfX} = $[\frac{\partial f_0}{\partial x_0}, \frac{\partial f_0}{\partial x_1}, \frac{\partial f_1}{\partial x_0}, \frac{\partial f_1}{\partial x_1}]$; \texttt{X} et \texttt{dfX} sont des \texttt{arrays} de type \texttt{double}, l'un de longueur $2$, l'autre de longueur $4$.
+
+\part
+La méthode de Newton consiste à choisir une valeur initiale $X_0 \in \mathbb{R}^2$ et à calculer la suite définie par la récurrence $X_{n} = X_{n-1} - df(X_{n-1})^{-1}X_{n-1}$. Pour de nombreux choix de $X_0$, la méthode de Newton converge, très rapidement, vers un zéro de $f$; il peut arriver cependant, pour certains choix de $X_0$, que la méthode ne converge pas.\\
+
+\begin{subparts}
+\subpart
+Ecrire une fonction \texttt{inverse}, qui prend une matrice \texttt{mat} carrée de taille $2$, \texttt{array} de type \texttt{double} et de longueur $4$ et qui renvoie son inverse \texttt{imat}.
+\subpart
+Ecrire une fonction \texttt{multiply}, qui prend une matrice \texttt{mat}, ainsi qu'un vecteur \texttt{v} et qui renvoie le produit de \texttt{mat} par \texttt{v}; on notera \texttt{w} ce produit; \texttt{v} et \texttt{w} sont des \texttt{arrays} de type \texttt{double} et de longueur $2$.
+\end{subparts}
+
+\part
+Ecrire une fonction \texttt{newton2} qui prend en arguments une valeur initiale \texttt{X0} et un scalaire \texttt{epsilon};
+\texttt{newton2} écrira dans un fichier nommé \texttt{newton2.txt} les couples $X_n$ ainsi que l'erreur $\lVert X_n - X_{n-1} \rVert$ - il y aura donc valeurs numériques par ligne, et seulement deux valeurs sur la première ligne; en pratique, pour l'erreur $\lVert X_n - X_{n-1} \rVert$, on pourra prendre au choix\\
+$\sqrt{(X_n[0] - X_{n-1}[0])^2 + (X_n[1] - X_{n-1}[1])^2}$\\
+ ou $\lVert X_n - X_{n-1} \rVert = \lvert X_n[0] - X_{n-1}[0] \rvert + \lvert X_n[1] - X_{n-1}[1] \rvert$, si la fonction racine carrée n'est pas disponible.
+\part
+Compiler \texttt{gcc newton2.c -o newton2}, exécuter \texttt{./newton2 X0[0] X0[1] epsilon} pour différentes valeurs de \texttt{X0 epsilon} et vérifier vos résultats dans le fichier \texttt{newton2.txt}.
+\end{parts}
+
+
+
+\end{questions}
 \end{document}
 
 
