@@ -133,11 +133,13 @@ Dans cet exemple, on considère un système de deux équations à deux inconnues
 Dans \texttt{newton2.c}, écrire la fonction \texttt{f} définie par $f(x_0, x_1) = (x_0^2 + 2x_1^2 - 1.0, x_0x_1)$; la fonction \texttt{f} prendra en argument \texttt{X}, et retournera \texttt{fX}; \texttt{X} et \texttt{fX} sont des \texttt{arrays} de longueur $2$ et de type \texttt{double}.
 
 \part
-Ecrire la fonction \texttt{df}, dérivée de $f$; mathématiquement, la dérivée de $f$ au point $(x_0, x_1)$ est la matrice 
-$df(x) = \begin{pmatrix}
-\frac{\partial f_0}{\partial x_0} & \frac{\partial f_0}{\partial x_1} \\
-\frac{\partial f_1}{\partial x_0} & \frac{\partial f_1}{\partial x_1} 
-\end{pmatrix}$
+Ecrire la fonction \texttt{df}, dérivée de $f$; mathématiquement, la dérivée de $f$ au point $(x_0, x_1)$ est la matrice, dite Jacobienne :
+\begin{equation}
+df(x) = \begin{pmatrix}
+\dfrac{\partial f_0}{\partial x_0} & \dfrac{\partial f_0}{\partial x_1} \\
+\dfrac{\partial f_1}{\partial x_0} & \dfrac{\partial f_1}{\partial x_1} 
+\end{pmatrix}
+\end{equation}
 avec $f_0 = x_0^2 + 2x_1^2 - 1.0, f_1 = x_0x_1$; la fonction \texttt{df} prendra en argument \texttt{X} et retournera \texttt{dfX}, avec \texttt{dfX} = $[\frac{\partial f_0}{\partial x_0}, \frac{\partial f_0}{\partial x_1}, \frac{\partial f_1}{\partial x_0}, \frac{\partial f_1}{\partial x_1}]$; \texttt{X} et \texttt{dfX} sont des \texttt{arrays} de type \texttt{double}, l'un de longueur $2$, l'autre de longueur $4$.
 
 \part
