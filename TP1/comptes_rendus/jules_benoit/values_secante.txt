@@ -1,2 +1,0 @@
-endradrement = [0.3472963553,  0.3472963641]
-nombre d'iteration = 4
